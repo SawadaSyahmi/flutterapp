@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutterapp/models/assessment.dart';
+import 'package:flutterapp/models/group_member.dart';
+import 'package:flutterapp/models/mock_data.dart';
+import 'package:flutterapp/screens/details.dart';
+
 
 
 void main() {
@@ -17,14 +21,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData( 
         primaryColor: const Color(0xff075E54),
       ),
-      home: const HomePage(), //only when we start the app the thing that changing
+      home: HomePage(mockData), //only when we start the app the thing that changing
     );
   }
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  
+  final List _data;
 
+  const HomePage(this._data, {super.key});
   @override
   // ignore: library_private_types_in_public_api
   _HomePageState createState() => _HomePageState();
@@ -36,6 +42,23 @@ class _HomePageState extends State<HomePage>
 
   Color _color = Colors.green;
   double _size = 50.0;
+  
+  void _navigate(index) async {
+    final returnData = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetailsScreen(
+          Assessment.copy(widget._data[index]),
+        ),
+      ),
+    );
+
+    if (returnData != null) {
+      setState(() => widget._data[index] = returnData);
+    }
+  }
+
+
 
   @override
   void initState() {
@@ -95,7 +118,7 @@ class _HomePageState extends State<HomePage>
           )),
           const Tab(
             child: Text(
-              "CALLS",
+              "Review",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           )
@@ -110,7 +133,32 @@ class _HomePageState extends State<HomePage>
         Center(child: Text("Camera",style: TextStyle(color:_color,fontSize: _size),),),
         Center(child: Text("Chats",style: TextStyle(color:_color,fontSize: _size),),),
         Center(child: Text("Status",style: TextStyle(color:_color,fontSize: _size),),),
-        Center(child: Text("Calls",style: TextStyle(color:_color,fontSize: _size),),),],
+        Center(child: ListView.separated(
+        itemCount: widget._data.length,
+        itemBuilder: (context, index) => ListTile(
+          title: Text(widget._data[index].member.shortName),
+          subtitle: Text(widget._data[index].member.fullName),
+          trailing: CircleAvatar(
+            backgroundColor:
+                widget._data[index].percent < 50 ? Colors.red : Colors.green,
+            child: Text(
+              widget._data[index].percent.round().toString(),
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          onTap: () => _navigate(index),
+        ),
+        separatorBuilder: (context, index) => const Divider(
+          color: Colors.grey,
+        ),
+      ),
+        
+        
+        
+        
+        
+        
+        ),],
 
        
     ),
