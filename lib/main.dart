@@ -42,13 +42,13 @@ class _HomePageState extends State<HomePage>
 
   Color _color = Colors.green;
   double _size = 50.0;
-  
+
   void _navigate(index) async {
     final returnData = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => DetailsScreen(
-          Assessment.copy(widget._data[index]),
+          Assessment.copy(widget._data[index]), //when you updated the data => you wany 
         ),
       ),
     );
@@ -57,8 +57,7 @@ class _HomePageState extends State<HomePage>
       setState(() => widget._data[index] = returnData);
     }
   }
-
-
+  
 
   @override
   void initState() {
@@ -93,7 +92,7 @@ class _HomePageState extends State<HomePage>
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
       ],
       title: const Text(
-        "WhatsApp",
+        "Peer Review App",
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
 
@@ -128,7 +127,7 @@ class _HomePageState extends State<HomePage>
 
 
     body: TabBarView( // page page will change corespond to the selected tab
-      controller: tabController,
+      controller: tabController, //UI element
       children:  <Widget>[
         Center(child: Text("Camera",style: TextStyle(color:_color,fontSize: _size),),),
         Center(child: Text("Chats",style: TextStyle(color:_color,fontSize: _size),),),
@@ -146,7 +145,7 @@ class _HomePageState extends State<HomePage>
               style: TextStyle(color: Colors.white),
             ),
           ),
-          onTap: () => _navigate(index),
+          onTap: () => _navigate(index), //navigation part
         ),
         separatorBuilder: (context, index) => const Divider(
           color: Colors.grey,

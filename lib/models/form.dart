@@ -28,3 +28,4 @@ List<Scale> scales = [
   Scale(1, 'Poor'),
   Scale(0, 'Not at all')
 ];
+

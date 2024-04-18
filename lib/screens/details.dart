@@ -14,7 +14,7 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    return PopScope(
+    return PopScope( //why ni use popscope and what is popscope
       canPop: true,
       child: Scaffold(
         appBar: AppBar(
@@ -41,7 +41,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   setState(() => widget._data.points[index] = newValue!),
             ),
           ),
-          separatorBuilder: (context, index) => Divider(
+          separatorBuilder: (context, index) => const Divider(
             color: Colors.grey,
           ),
         ),
