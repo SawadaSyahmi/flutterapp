@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/models/assessment.dart';
-import 'package:flutterapp/models/group_member.dart';
+
 import 'package:flutterapp/models/mock_data.dart';
 import 'package:flutterapp/screens/details.dart';
 
@@ -130,8 +130,9 @@ class _HomePageState extends State<HomePage>
       controller: tabController, //UI element
       children:  <Widget>[
         Center(child: Text("Camera",style: TextStyle(color:_color,fontSize: _size),),),
-        Center(child: Text("Chats",style: TextStyle(color:_color,fontSize: _size),),),
-        Center(child: Text("Status",style: TextStyle(color:_color,fontSize: _size),),),
+        Center(child: Text("Chats",style: TextStyle(color:_color,fontSize: _size),),), // 
+        Center(child: SellerDetailsScreen(), ),
+        
         Center(child: ListView.separated(
         itemCount: widget._data.length,
         itemBuilder: (context, index) => ListTile(
@@ -151,13 +152,7 @@ class _HomePageState extends State<HomePage>
           color: Colors.grey,
         ),
       ),
-        
-        
-        
-        
-        
-        
-        ),],
+   ),],
 
        
     ),
@@ -202,3 +197,26 @@ class _HomePageState extends State<HomePage>
 
   }
 }
+
+
+class SellerDetailsScreen extends StatelessWidget {
+  const SellerDetailsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return newlayer();
+  }
+}
+
+class newlayer extends StatelessWidget {
+
+  double _size = 50.0;
+  Color blue = Colors.blue;
+
+  newlayer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text("Change this to GridView",style: TextStyle(color:blue,fontSize: _size),);
+  }
+} 
